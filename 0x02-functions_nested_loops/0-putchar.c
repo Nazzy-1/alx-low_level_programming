@@ -1,8 +1,12 @@
 #include "main.h"
+
 /**
- *main - Entry point, return (0)
- *Return : Always 0
- */
+ *print times table - Entry point of the program
+ *
+ *Description: Prints n times table starting with 0.
+ *@n: prints the times table
+ *Return: 0 (Success)
+*/
 
 int main(void)
 {

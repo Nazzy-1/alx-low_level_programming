@@ -1,13 +1,12 @@
 #include "main.h"
 
 /**
- *print times table - Entry point of the program
+ * main - Entry point of the program
  *
- *Description: Prints n times table starting with 0.
- *@n: prints the times table
- *Return: 0 (Success)
-*/
-
+ * Description: Prints "_putchar" followed by a new line.
+ *
+ * Return: 0 (Success)
+ */
 int main(void)
 {
 _putchar('_');

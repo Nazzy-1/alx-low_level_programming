@@ -1,1 +1,1 @@
-program that prints the first 50
+program that finds and prints the sum of the even-valued terms, followed by a new line

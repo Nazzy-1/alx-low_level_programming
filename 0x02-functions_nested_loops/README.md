@@ -1,1 +1,1 @@
-list all the natural numbers
+program that prints the first 50

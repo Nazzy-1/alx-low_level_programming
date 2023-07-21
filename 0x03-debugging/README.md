@@ -1,1 +1,1 @@
-prints the largest of three integers
+output works correctly for all dates and all leap years

@@ -1,1 +1,1 @@
-function that prints every other character of a string, starting with the first character, followed by a new line
+function that prints n elements of an array of integers, followed by a new line

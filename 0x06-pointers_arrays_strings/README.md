@@ -1,1 +1,1 @@
-Add one line to this code
+function that adds two numbers

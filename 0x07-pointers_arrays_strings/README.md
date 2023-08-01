@@ -1,1 +1,1 @@
-abc123
+file that contains the password for the crackme2 executable

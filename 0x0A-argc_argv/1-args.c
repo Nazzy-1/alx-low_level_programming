@@ -3,6 +3,7 @@
 /**
  * main - Entry point for the program
  * @argc: The number of command-line arguments
+ * @argv: An array of pointers to the command-line arguments (unused)
  *
  * Return: 0 on success
  */

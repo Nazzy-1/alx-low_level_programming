@@ -1,104 +1,53 @@
-#include "elf_header.h"
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <unistd.h>
-
-int open_elf_file(const char *filename);
-Elf64_Ehdr *read_elf_header(int fd);
-void close_elf_file(int fd);
-void print_elf_header_info(Elf64_Ehdr *header);
+#include <elf.h>
+#include "elf_header.h"
 
 /**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
- * @argv: An array of strings containing the command-line arguments.
- *
- * Return: 0 on success, 98 on error.
+ * main - check the code for Holberton School students.
+ * @argc: number of arguments.
+ * @argv: arguments vector.
+ * Return: Always 0.
  */
 int main(int argc, char *argv[])
 {
-if (argc != 2)
-{
-fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
-return (98);
-}
+	int fd, ret_read;
+	char ptr[27];
 
-Elf64_Ehdr *header; /* Declare the header variable at the beginning*/
-int fd = open_elf_file(argv[1]);
-header = read_elf_header(fd); /* Assign the header here*/
+	if (argc != 2)
+	{
+		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n");
+		exit(98);
+	}
 
-check_elf(header->e_ident);
-printf("ELF Header:\n");
-print_elf_header_info(header);
+	fd = open(argv[1], O_RDONLY);
 
-free(header);
-close_elf_file(fd);
-return (0);
-}
+	if (fd < 0)
+	{
+		dprintf(STDERR_FILENO, "Err: file can not be open\n");
+		exit(98);
+	}
 
-/**
- * open_elf_file - Opens an ELF file for reading.
- * @filename: The name of the ELF file to open.
- *
- * Return: The file descriptor of the opened file.
- */
-int open_elf_file(const char *filename)
-{
-int fd = open(filename, O_RDONLY);
-if (fd == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read file %s\n", filename);
-exit(98);
-}
-return (fd);
-}
+	lseek(fd, 0, SEEK_SET);
+	ret_read = read(fd, ptr, 27);
 
-Elf64_Ehdr *read_elf_header(int fd)
-{
-Elf64_Ehdr *header = malloc(sizeof(Elf64_Ehdr));
-if (header == NULL)
-{
-close(fd);
-dprintf(STDERR_FILENO, "Error: Memory allocation failed\n");
-exit(98);
-}
+	if (ret_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Err: The file can not be read\n");
+		exit(98);
+	}
 
-ssize_t bytes_read = read(fd, header, sizeof(Elf64_Ehdr));
-if (bytes_read == -1)
-{
-free(header);
-close(fd);
-dprintf(STDERR_FILENO, "Error: Unable to read ELF header\n");
-exit(98);
-}
+	if (!check_elf(ptr))
+	{
+		dprintf(STDERR_FILENO, "Err: It is not an ELF\n");
+		exit(98);
+	}
 
-return (header);
-}
+	check_sys(ptr);
+	close(fd);
 
-/**
- * close_elf_file - Closes an open ELF file.
- * @fd: The file descriptor of the open file to close.
- */
-void close_elf_file(int fd)
-{
-if (close(fd) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close file descriptor %d\n", fd);
-exit(98);
-}
-}
-
-/**
- * print_elf_header_info - Prints information from the ELF header.
- * @header: A pointer to the ELF header structure.
- */
-void print_elf_header_info(Elf64_Ehdr *header)
-{
-print_magic(header->e_ident);
-print_class(header->e_ident);
-print_data(header->e_ident);
-print_version(header->e_ident);
-    /* Add more print functions as needed*/
+	return (0);
 }
 

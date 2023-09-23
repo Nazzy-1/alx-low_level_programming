@@ -1,5 +1,5 @@
-#ifndef ELF_HEADER_H
-#define ELF_HEADER_H
+#ifndef ELF_FUNCTIONS_H
+#define ELF_FUNCTIONS_H
 
 void print_addr(char *ptr);
 void print_type(char *ptr);
@@ -10,4 +10,4 @@ void print_magic(char *ptr);
 void check_sys(char *ptr);
 int check_elf(char *ptr);
 
-#endif
+#endif 

@@ -5,9 +5,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <elf.h>
+#include "elf_functions.h"
 
 /**
- * print_addr - prints address.
+ * print_addr - prints address
  * @ptr: magic.
  * Return: no return.
  */
@@ -52,7 +53,7 @@ void print_addr(char *ptr)
 }
 
 /**
- * print_type - prints type.
+ * print_type - prints type
  * @ptr: magic.
  * Return: no return.
  */
@@ -81,7 +82,7 @@ void print_type(char *ptr)
 }
 
 /**
- * print_osabi - prints osabi.
+ * print_osabi - prints osabi
  * @ptr: magic.
  * Return: no return.
  */
@@ -104,7 +105,7 @@ void print_osabi(char *ptr)
 
 
 /**
- * print_version - prints version.
+ * print_version - prints version
  * @ptr: magic.
  * Return: no return.
  */
@@ -120,7 +121,7 @@ void print_version(char *ptr)
 	printf("\n");
 }
 /**
- * print_data - prints data.
+ * print_data - prints data
  * @ptr: magic.
  * Return: no return.
  */
@@ -134,68 +135,5 @@ void print_data(char *ptr)
 
 	if (data == 2)
 		printf(", big endian\n");
-}
-/**
- * print_magic - prints magic info.
- * @ptr: magic.
- * Return: no return.
- */
-void print_magic(char *ptr)
-{
-	int bytes;
-
-	printf("  Magic:  ");
-
-	for (bytes = 0; bytes < 16; bytes++)
-		printf(" %02x", ptr[bytes]);
-
-	printf("\n");
-
-}
-
-/**
- * check_sys - checks the version system.
- * @ptr: magic.
- * Return: no return.
- */
-void check_sys(char *ptr)
-{
-	char sys = ptr[4] + '0';
-
-	if (sys == '0')
-		exit(98);
-
-	printf("ELF Header:\n");
-	print_magic(ptr);
-
-	if (sys == '1')
-		printf("  Class:                             ELF32\n");
-
-	if (sys == '2')
-		printf("  Class:                             ELF64\n");
-
-	print_data(ptr);
-	print_version(ptr);
-	print_osabi(ptr);
-	print_type(ptr);
-	print_addr(ptr);
-}
-
-/**
- * check_elf - checks for an elf file.
- * @ptr: magic.
- * Return: 1 if it is an elf file. 0 if not.
- */
-int check_elf(char *ptr)
-{
-	int addr = (int)ptr[0];
-	char E = ptr[1];
-	char L = ptr[2];
-	char F = ptr[3];
-
-	if (addr == 127 && E == 'E' && L == 'L' && F == 'F')
-		return (1);
-
-	return (0);
 }
 

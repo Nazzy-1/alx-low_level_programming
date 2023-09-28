@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "main.h"
-#include "_putchar.h"
-#include "print_binary.h"
 
 /**
  * main - check the code
@@ -22,3 +20,4 @@ int main(void)
     printf("\n");
     return (0);
 }
+

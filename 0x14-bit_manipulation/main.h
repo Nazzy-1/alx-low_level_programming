@@ -22,6 +22,7 @@ void one(const char *command);
 void two(const char *command);
 char *copy(char *env);
 unsigned int binary_to_uint(const char *binary);
-
+int _putchar(char c);
+void print_binary(unsigned long int n);
 
 #endif

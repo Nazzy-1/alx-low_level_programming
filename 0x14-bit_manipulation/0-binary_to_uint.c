@@ -4,7 +4,7 @@
 /**
  * binary_to_uint - binary can be converted through unsigned int
  * @b: A string that takes binary number or numbers
- * Return: A numbers that are coverted
+ * Return: the converted number
  */
 
 unsigned int binary_to_uint(const char *b)
